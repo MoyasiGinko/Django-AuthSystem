@@ -109,11 +109,6 @@ def login_view(request):
 def dashboard(request):
     return render(request, "accounts/dashboard.html", {"user": request.user})
 
-def activation_prompt(request, user_id):
-    user = get_object_or_404(get_user_model(), id=user_id)
-    return render(request, "accounts/activation_prompt.html", {"user": user})
-
-
 
 def resend_activation_email(request):
     if request.method == "POST":
