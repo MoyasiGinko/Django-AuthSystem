@@ -13,6 +13,8 @@ from .views import (
     resend_activation_email,
     activation_prompt,
     activate_account_page,
+    PasswordResetRequestView,
+    PasswordResetConfirmView,
 )
 
 urlpatterns = [
@@ -28,5 +30,7 @@ urlpatterns = [
     path('resend-activation/', resend_activation_email, name='resend_activation'),
     path('activation-prompt/<int:user_id>/', activation_prompt, name='activation_prompt'),
     path('activate-account/', activate_account_page, name='activate_account'),
-     path('resend-activation-email/', resend_activation_email, name='resend_activation_email'),
+    path('resend-activation-email/', resend_activation_email, name='resend_activation_email'),
+    path('password-reset/', PasswordResetRequestView.as_view(), name='password_reset_request'),
+    path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 ]

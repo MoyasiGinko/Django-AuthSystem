@@ -18,6 +18,12 @@ from .utils import account_activation_token
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+from django.contrib.auth.tokens import default_token_generator
+from .forms import PasswordResetRequestForm
+
+
+User = get_user_model()
+
 class EmailValidationView(View):
     def post(self, request):
         data = json.loads(request.body)
@@ -210,3 +216,79 @@ def activate_account_page(request):
             messages.info(request, "Account is already activated.")
         return redirect('login')
     return render(request, 'authentication/activate_account.html')
+
+
+
+
+
+
+
+
+
+class PasswordResetRequestView(View):
+    def get(self, request):
+        form = PasswordResetRequestForm()
+        return render(request, 'authentication/password_reset_request.html', {'form': form})
+
+    def post(self, request):
+        form = PasswordResetRequestForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = User.objects.filter(email=email).first()
+            if user:
+                current_site = get_current_site(request)
+                mail_subject = 'Reset your password'
+                message = render_to_string('authentication/password_reset_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': default_token_generator.make_token(user),
+                })
+                send_mail(mail_subject, message, None, [email])
+                messages.success(request, 'We have sent you an email to reset your password.')
+            else:
+                messages.error(request, 'No user is associated with this email address.')
+            return redirect('password_reset_request')
+        return render(request, 'authentication/password_reset_request.html', {'form': form})
+
+
+class PasswordResetConfirmView(View):
+    def get(self, request, uidb64, token):
+        try:
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user is not None and default_token_generator.check_token(user, token):
+            return render(request, 'authentication/password_reset_confirm.html', {'validlink': True, 'user': user})
+        else:
+            messages.error(request, 'The password reset link was invalid, possibly because it has already been used.')
+            return redirect('password_reset_request')
+
+    def post(self, request, uidb64, token):
+        try:
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user is not None and default_token_generator.check_token(user, token):
+            password = request.POST.get('password')
+            password_confirm = request.POST.get('password_confirm')
+
+            if password != password_confirm:
+                messages.error(request, 'Passwords do not match.')
+                return render(request, 'authentication/password_reset_confirm.html', {'validlink': True, 'user': user})
+
+            if len(password) < 6:
+                messages.error(request, 'Password is too short.')
+                return render(request, 'authentication/password_reset_confirm.html', {'validlink': True, 'user': user})
+
+            user.set_password(password)
+            user.save()
+            messages.success(request, 'Password reset successful. You can now log in with your new password.')
+            return redirect('login')
+        else:
+            messages.error(request, 'The password reset link was invalid, possibly because it has already been used.')
+            return redirect('password_reset_request')
