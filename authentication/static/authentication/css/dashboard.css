@@ -1,0 +1,113 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+}
+
+.navbar-brand a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbar-nav li {
+  margin-left: 20px;
+}
+
+.navbar-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.logout-form {
+  margin: 0;
+}
+
+.logout-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Container */
+.container {
+  display: flex;
+  margin: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+  flex: 0 0 30%;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+}
+
+.user-firstname {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #545a91;
+}
+
+.user-name {
+  font-size: 1.2rem;
+  color: #555;
+}
+.user-email {
+  font-size: 1rem;
+  color: #777;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.main-content h2 {
+  margin-top: 0;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+}
+
+.post {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.post h3 {
+  margin-top: 0;
+}

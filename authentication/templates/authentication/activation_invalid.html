@@ -1,3 +1,24 @@
-<p>
-  The activation link was invalid, possibly because it has already been used.
-</p>
+{% extends 'base_auth.html' %} {% load static %} {% block content %}
+<div class="invalid-link-container">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Invalid Activation Link</h2>
+      <p class="card-text">
+        The activation link was invalid, possibly because it has already been
+        used or it is expired.
+      </p>
+      <a
+        href="{% url 'activate_account' %}?user_id={{ user_id }}"
+        class="btn btn-primary"
+        >Request New Activation Link</a
+      >
+      <a href="{% url 'login' %}" class="btn btn-secondary">Go to Login</a>
+    </div>
+  </div>
+</div>
+
+<link
+  rel="stylesheet"
+  href="{% static 'authentication/css/activation_invalid.css' %}"
+/>
+{% endblock content %}

@@ -208,13 +208,24 @@ def resend_activation_email(request):
 def activate_account_page(request):
     if request.method == "POST":
         email = request.POST.get('email')
-        user = get_object_or_404(get_user_model(), email=email)
+        if not email:
+            messages.error(request, "Email field cannot be empty.")
+            return render(request, 'authentication/activate_account.html')
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            messages.error(request, "No account found with this email address.")
+            return render(request, 'authentication/activate_account.html')
+
         if not user.is_active:
             send_activation_email(request, user)
             messages.info(request, "Activation email sent. Please check your inbox.")
         else:
             messages.info(request, "Account is already activated.")
+
         return redirect('login')
+
     return render(request, 'authentication/activate_account.html')
 
 
@@ -237,6 +248,10 @@ class PasswordResetRequestView(View):
                     'domain': current_site.domain,
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'token': default_token_generator.make_token(user),
+                    'reset_token': reverse('password_reset_confirm', kwargs={
+                        'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'token': default_token_generator.make_token(user)
+        })
                 })
                 send_mail(mail_subject, message, None, [email])
                 messages.success(request, 'We have sent you an email to reset your password.')
