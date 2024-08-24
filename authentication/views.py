@@ -157,3 +157,8 @@ class LogoutView(View):
         auth.logout(request)
         messages.success(request, 'You have been logged out')
         return redirect('login')
+
+
+class DashboardView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "dashboard/dashboard.html", {"user": request.user})
