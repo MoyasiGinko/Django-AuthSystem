@@ -1,0 +1,113 @@
+/* General Styles */
+body {
+  background-color: #e0e0e0;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Centered Register Container with 3D effect */
+.card {
+  margin-top: 400px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #ffffff, #d4d4d4);
+  box-shadow: 5px 5px 15px #b0b0b0, -5px -5px 15px #ffffff;
+  padding: 3rem;
+  max-width: 400px;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.card-body {
+  padding: 0;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.text-muted {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Input Fields with Soft Shadows */
+.form-control {
+  border-radius: 10px;
+  background: #f2f2f2;
+  box-shadow: inset 5px 5px 10px #b0b0b0, inset -5px -5px 10px #ffffff;
+  border: none;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+/* Show Password Toggle */
+.showPasswordToggle {
+  font-size: 0.9rem;
+  color: #007bff;
+  user-select: none;
+  cursor: pointer;
+  text-align: right;
+}
+
+/* Password Strength Indicator */
+.passwordStrengthIndicator {
+  height: 10px;
+  width: 100%;
+  border-radius: 5px;
+  background: linear-gradient(
+    90deg,
+    #ff4b4b 0%,
+    #ff4b4b 25%,
+    #ff9800 50%,
+    #ffeb3b 75%,
+    #4caf50 100%
+  );
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.2);
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.password-utils {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+/* Submit Button with Gradient and Shadow */
+.submit-btn {
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  background: linear-gradient(145deg, #4e90e2, #1e3a8a);
+  color: white;
+  border: none;
+  box-shadow: 5px 5px 15px #b0b0b0, -5px -5px 15px #ffffff;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for the submit button */
+.submit-btn:hover {
+  background: linear-gradient(145deg, #1e3a8a, #4e90e2);
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card {
+    margin-top: 400px;
+    padding: 2rem;
+  }
+
+  .submit-btn {
+    font-size: 1rem;
+  }
+}
