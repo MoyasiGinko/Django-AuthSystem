@@ -15,6 +15,7 @@ from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from .utils import account_activation_token
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class EmailValidationView(View):
@@ -44,6 +45,7 @@ class RegistrationView(View):
         return render(request, 'authentication/register.html')
 
     def post(self, request):
+
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
@@ -82,14 +84,14 @@ class VerificationView(View):
             id = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=id)
 
-            if user.is_active:
-                return redirect('login')
+            # if user.is_active:
+            #     return redirect('login')
 
             if account_activation_token.check_token(user, token):
                 user.is_active = True
                 user.save()
                 messages.success(request, 'Account activated successfully')
-                return redirect('login')
+                return redirect('activation_success')
             else:
                 messages.error(request, 'Activation link is invalid.')
                 return redirect('activation_invalid')
@@ -97,8 +99,6 @@ class VerificationView(View):
         except DjangoUnicodeDecodeError:
             messages.error(request, 'Activation link is invalid.')
             return redirect('activation_invalid')
-
-        return redirect('login')
 
 
 class LoginView(View):
@@ -133,7 +133,10 @@ class LogoutView(View):
         return redirect('login')
 
 
-class DashboardView(View):
+class DashboardView(LoginRequiredMixin, View):
+    login_url = 'login'  # Redirects to this URL if the user is not logged in
+    redirect_field_name = 'redirect_to'  # Field used for redirection
+
     def get(self, request, *args, **kwargs):
         return render(request, "dashboard/dashboard.html", {"user": request.user})
 
