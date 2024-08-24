@@ -45,10 +45,11 @@ class RegistrationView(View):
         return render(request, 'authentication/register.html')
 
     def post(self, request):
-
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
 
         context = {
             'fieldValues': request.POST
@@ -66,7 +67,7 @@ class RegistrationView(View):
             messages.error(request, 'Password is too short.')
             return render(request, 'authentication/register.html', context)
 
-        user = User.objects.create_user(username=username, email=email)
+        user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name)
         user.set_password(password)
         user.is_active = False
         user.save()
@@ -76,6 +77,7 @@ class RegistrationView(View):
         if user.is_active is False:
             return redirect('activation_prompt', user_id=user.id)
         return render(request, 'authentication/register.html')
+
 
 
 class VerificationView(View):
