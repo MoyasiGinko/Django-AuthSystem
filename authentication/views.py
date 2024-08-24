@@ -219,12 +219,6 @@ def activate_account_page(request):
 
 
 
-
-
-
-
-
-
 class PasswordResetRequestView(View):
     def get(self, request):
         form = PasswordResetRequestForm()
