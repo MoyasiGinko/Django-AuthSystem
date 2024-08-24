@@ -1,12 +1,27 @@
-<h1>Activate Your Account</h1>
-<p>
-  Thank you for registering! Please request an activation email to activate your
-  account.
-</p>
-{% if user.is_authenticated and not user.is_active %}
-<form method="post" action="{% url 'resend_activation_email' %}">
-  {% csrf_token %}
-  <input type="hidden" name="user_id" value="{{ user.id }}" />
-  <button type="submit">Resend Activation Email</button>
-</form>
-{% endif %}
+{% extends 'base_auth.html' %} {% load static %} {% block content %}
+<div class="activation-container">
+  <h1>Activate Your Account</h1>
+  <p>
+    Thank you for registering! Please request an activation email to activate
+    your account.
+  </p>
+
+  {% if user.is_authenticated and not user.is_active %}
+  <form
+    method="post"
+    action="{% url 'resend_activation_email' %}"
+    class="activation-form"
+  >
+    {% csrf_token %}
+    <input type="hidden" name="user_id" value="{{ user.id }}" />
+    <button type="submit">Resend Activation Email</button>
+  </form>
+  {% endif %}
+</div>
+
+<link
+  rel="stylesheet"
+  href="{% static 'authentication/css/activation_prompt.css' %}"
+/>
+
+{% endblock content %}

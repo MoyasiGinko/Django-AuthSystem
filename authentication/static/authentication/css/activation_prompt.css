@@ -1,0 +1,58 @@
+/* General Styles */
+body {
+  background-color: #f0f4f8;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Activation Container */
+.activation-container {
+  background: linear-gradient(145deg, #ffffff, #e0e0e0);
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px #b0b0b0, -5px -5px 15px #ffffff;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Header */
+.activation-container h1 {
+  margin-bottom: 1rem;
+  color: #333;
+  font-weight: 700;
+}
+
+/* Paragraph */
+.activation-container p {
+  margin-bottom: 2rem;
+  color: #555;
+  font-size: 1rem;
+}
+
+/* Form Styles */
+.activation-form {
+  display: flex;
+  justify-content: center;
+}
+
+.activation-form button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(145deg, #4e90e2, #1e3a8a);
+  color: white;
+  font-size: 1rem;
+  box-shadow: 5px 5px 15px #b0b0b0, -5px -5px 15px #ffffff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.activation-form button:hover {
+  background: linear-gradient(145deg, #1e3a8a, #4e90e2);
+  transform: scale(1.05);
+}
