@@ -4,12 +4,111 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #f7f7f7, #e0e0e0);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 600px;
+        padding: 30px;
+        text-align: center;
+        border: 1px solid #ddd;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        color: #333;
+        margin: 0;
+        font-size: 24px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+      }
+
+      .form-group label {
+        color: #555;
+        margin-bottom: 8px;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      .form-group input:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+      }
+
+      .form-group input::placeholder {
+        color: #999;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 15px;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #2980b9, #1f5a8c);
+      }
+
+      button:active {
+        background: #1f5a8c;
+        transform: scale(0.98);
+      }
+    </style>
   </head>
   <body>
-    <h2>Register</h2>
-    <form method="post">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">Register</button>
-    </form>
+    <div class="container">
+      <div class="header">
+        <h2>Register</h2>
+      </div>
+      <form method="post">
+        {% csrf_token %} {{ form }}
+        <button type="submit">Register</button>
+      </form>
+    </div>
   </body>
 </html>
