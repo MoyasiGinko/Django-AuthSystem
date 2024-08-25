@@ -159,9 +159,11 @@ class ActivationInvalidView(View):
         return render(request, 'authentication/activation_invalid.html')
 
 
-def activation_prompt(request, user_id):
-    user = get_object_or_404(get_user_model(), id=user_id)
-    return render(request, "authentication/activation_prompt.html", {"user": user})
+class ActivationPromptView(View):
+    def get(self, request, user_id):
+        user = get_object_or_404(get_user_model(), id=user_id)
+        return render(request, "authentication/activation_prompt.html", {"user": user})
+
 
 
 def send_activation_email(request, user):
@@ -192,8 +194,8 @@ def send_activation_email(request, user):
         return HttpResponse(f'Error: {e}')
 
 
-def resend_activation_email(request):
-    if request.method == "POST":
+class ResendActivationEmailView(View):
+    def post(self, request):
         user_id = request.POST.get('user_id')
         user = get_object_or_404(get_user_model(), id=user_id)
         if not user.is_active:
@@ -202,11 +204,17 @@ def resend_activation_email(request):
         else:
             messages.info(request, "Account is already activated.")
         return redirect('activation_prompt', user_id=user_id)
-    return redirect('activation_prompt')
+
+    def get(self, request):
+        return redirect('activation_prompt')
 
 
-def activate_account_page(request):
-    if request.method == "POST":
+
+class ActivateAccountView(View):
+    def get(self, request):
+        return render(request, 'authentication/activate_account.html')
+
+    def post(self, request):
         email = request.POST.get('email')
         if not email:
             messages.error(request, "Email field cannot be empty.")
@@ -225,8 +233,6 @@ def activate_account_page(request):
             messages.info(request, "Account is already activated.")
 
         return redirect('login')
-
-    return render(request, 'authentication/activate_account.html')
 
 
 
