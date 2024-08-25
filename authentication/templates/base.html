@@ -6,11 +6,11 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>TrulyExpenses {% block title %} {% endblock %}</title>
+    <title>AuthSystem {% block title %} {% endblock %}</title>
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet" />
     <link href="{% static 'css/main.css'%}" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
@@ -21,12 +21,10 @@
 
       <ul
         class="navbar-nav px-3"
-        style="display: flex; flex-direction: row; align-items: center;"
+        style="display: flex; flex-direction: row; align-items: center"
       >
         <li class="nav-item text-nowrap">
-          <span class="nav-link" href="">
-            ({{request.user.username}})
-          </span>
+          <span class="nav-link" href=""> ({{request.user.username}}) </span>
         </li>
 
         <li class="nav-item text-nowrap mt-3 ml-2">
@@ -68,6 +66,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>
