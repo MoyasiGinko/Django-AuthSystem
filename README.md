@@ -51,6 +51,28 @@ This approach ensures that your Django project's dependencies are well-managed a
 
 ### 6. Run the app
 
+- Create a new project
+
+```bash
+python -m venv myenv
+django-admin startproject < project_name >
+python manage.py startapp < app_name >
+```
+
+- Alternatively you can use Pipfile to manage your dependencies
+
+to install all your dependencies:
+
+```bash
+pipenv install
+```
+
+when installing a new dependencies:
+
+```bash
+pipenv install < package_name >
+```
+
 - Activate your Virtual Environment
 
 ```bash
@@ -63,4 +85,10 @@ and then migrate your SQL files
 python manage.py makemigrations
 python manage.py showmigrations
 python manage.py migrate
+```
+
+- Run your app
+
+```bash
+python manage.py runserver
 ```
