@@ -1,67 +1,38 @@
-{% extends 'base_auth.html' %} {% load static %} {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
-    <link
-      rel="stylesheet"
-      href="{% static 'authentication/css/dashboard.css' %}"
-    />
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="navbar-brand">
-        <a href="#">Company Name</a>
-      </div>
-      <ul class="navbar-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <form action="{% url 'logout' %}" method="POST" class="logout-form">
-        {% csrf_token %}
-        <button type="submit" class="logout-btn">Sign Out</button>
-      </form>
-    </nav>
+{% extends 'layout.html' %} {% load static %} {% block content %}
 
-    <!-- Main Content -->
-    <div class="container">
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <h2 class="user-firstname">Welcome, {{ user.first_name }}!</h2>
-        <p class="user-name">Username: {{ user.username }}</p>
-        <p class="user-email">Email: {{ user.email }}</p>
-        <p>This is your dashboard.</p>
-      </aside>
+<!-- Main Content -->
+<div class="container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="user-firstname">Welcome, {{ user.first_name }}!</h2>
+    <p class="user-name">Username: {{ user.username }}</p>
+    <p class="user-email">Email: {{ user.email }}</p>
+    <p>This is your dashboard.</p>
+  </aside>
 
-      <!-- Main Content Area -->
-      <main class="main-content">
-        <h2>Sample Posts or Data</h2>
-        <div class="posts">
-          <article class="post">
-            <h3>Post Title 1</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </article>
-          <article class="post">
-            <h3>Post Title 2</h3>
-            <p>
-              Nullam venenatis est ut nisi vehicula, vel auctor magna egestas.
-            </p>
-          </article>
-          <article class="post">
-            <h3>Post Title 3</h3>
-            <p>
-              Suspendisse potenti. Sed cursus tortor in odio blandit, sit amet
-              ultricies orci blandit.
-            </p>
-          </article>
-        </div>
-      </main>
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <h2>Sample Posts or Data</h2>
+    <div class="posts">
+      <article class="post">
+        <h3>Post Title 1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </article>
+      <article class="post">
+        <h3>Post Title 2</h3>
+        <p>Nullam venenatis est ut nisi vehicula, vel auctor magna egestas.</p>
+      </article>
+      <article class="post">
+        <h3>Post Title 3</h3>
+        <p>
+          Suspendisse potenti. Sed cursus tortor in odio blandit, sit amet
+          ultricies orci blandit.
+        </p>
+      </article>
     </div>
-  </body>
-</html>
+  </main>
+</div>
+
+<link rel="stylesheet" href="{% static 'authentication/css/dashboard.css' %}" />
+
 {% endblock content %}

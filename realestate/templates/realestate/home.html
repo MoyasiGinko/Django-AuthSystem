@@ -1,0 +1,16 @@
+{% extends 'layout.html' %} {% load static %} {% block content %}
+<h1>Welcome to Our Property Management System</h1>
+<div class="featured-properties">
+  <h2>Featured Properties</h2>
+  <div class="property-list">
+    {% for property in featured_properties %}
+    <div class="property-item">
+      <img src="{{ property.image.url }}" alt="{{ property.title }}" />
+      <h3>{{ property.title }}</h3>
+      <p>{{ property.location }}</p>
+      <p>${{ property.price }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
