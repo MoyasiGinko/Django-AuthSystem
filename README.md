@@ -48,3 +48,19 @@ To manage the libraries or packages you've used and installed in your Django pro
   ```
 
 This approach ensures that your Django project's dependencies are well-managed and easily transferable across different devices, similar to how `npm` manages dependencies in Node.js projects.
+
+### 6. Run the app
+
+- Activate your Virtual Environment
+
+```bash
+myenv\Scripts\activate
+```
+
+and then migrate your SQL files
+
+```bash
+python manage.py makemigrations
+python manage.py showmigrations
+python manage.py migrate
+```
