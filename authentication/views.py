@@ -20,6 +20,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth.tokens import default_token_generator
 from .forms import PasswordResetRequestForm
+from django.views.generic import TemplateView
+
+
 
 
 User = get_user_model()
@@ -124,7 +127,7 @@ class LoginView(View):
                 if user.is_active:
                     auth.login(request, user)
                     messages.success(request, f'Welcome, {user.username}. You are now logged in.')
-                    return redirect('dashboard')
+                    return redirect('profile')
                 messages.error(request, 'Account is not active. Please check your email.')
                 return render(request, 'authentication/login.html')
             messages.error(request, 'Invalid credentials. Please try again.')
@@ -141,12 +144,16 @@ class LogoutView(View):
         return redirect('login')
 
 
-class DashboardView(LoginRequiredMixin, View):
+
+class ProfileView(LoginRequiredMixin, View):
+    template_name = 'authentication/profile.html'
     login_url = 'login'  # Redirects to this URL if the user is not logged in
     redirect_field_name = 'redirect_to'  # Field used for redirection
 
     def get(self, request, *args, **kwargs):
-        return render(request, "dashboard/dashboard.html", {"user": request.user})
+        # Passing the logged-in user's data to the template
+        return render(request, self.template_name, {"user": request.user})
+
 
 
 class ActivationSuccessView(View):

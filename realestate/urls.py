@@ -6,7 +6,6 @@ from .views import (
     AboutUsView,
     ServicesView,
     ContactUsView,
-    ProfileView,
     DashboardView,
     Custom404View,
 )
@@ -18,7 +17,6 @@ urlpatterns = [
     path('about/', AboutUsView.as_view(), name='about_us'),
     path('services/', ServicesView.as_view(), name='services'),
     path('contact/', ContactUsView.as_view(), name='contact_us'),
-    path('profile/', ProfileView.as_view(), name='profile'),
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
 ]
 

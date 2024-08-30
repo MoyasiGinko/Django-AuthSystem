@@ -1,0 +1,14 @@
+{% extends 'layout.html' %} {% load static %} {% block content %}
+<div class="profile-container">
+  <h1>Your Profile</h1>
+  <div class="profile-details">
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <!-- Add more user information here as needed -->
+  </div>
+</div>
+
+<link rel="stylesheet" href="{% static 'authentication/css/profile.css' %}" />
+{% endblock content %}

@@ -7,7 +7,6 @@ from .views import (
     LogoutView,
     VerificationView,
     LoginView,
-    DashboardView,
     ActivationSuccessView,
     ActivationInvalidView,
     ResendActivationEmailView,
@@ -15,6 +14,8 @@ from .views import (
     ActivateAccountView,
     PasswordResetRequestView,
     PasswordResetConfirmView,
+    ProfileView,
+
 )
 
 urlpatterns = [
@@ -24,7 +25,7 @@ urlpatterns = [
     path('validate-username', csrf_exempt(UsernameValidationView.as_view()), name="validate-username"),
     path('validate-email', csrf_exempt(EmailValidationView.as_view()), name='validate_email'),
     path('activate/<uidb64>/<token>', VerificationView.as_view(), name='activate'),
-    path('dashboard', DashboardView.as_view(), name='dashboard'),
+    path('profile', ProfileView.as_view(), name='profile'),
     path('activation-success/', ActivationSuccessView.as_view(), name='activation_success'),
     path('activation-invalid/', ActivationInvalidView.as_view(), name='activation_invalid'),
     path('resend-activation-email/', ResendActivationEmailView.as_view(), name='resend_activation_email'),

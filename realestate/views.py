@@ -50,23 +50,13 @@ class ContactUsView(View):
         # Redirect to the same page with a success message
         return render(request, 'realestate/contact_us.html', {'success': True})
 
-
-
-# Profile View
-class ProfileView(LoginRequiredMixin, TemplateView):
-    template_name = 'realestate/profile.html'
-
 # Dashboard View
-class DashboardView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
-    template_name = 'realestate/dashboard.html'
+class DashboardView(LoginRequiredMixin, View):
+    login_url = 'login'  # Redirects to this URL if the user is not logged in
+    redirect_field_name = 'redirect_to'  # Field used for redirection
 
-    def test_func(self):
-        return self.request.user.is_staff
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['properties'] = Property.objects.filter(agent=self.request.user)
-        return context
+    def get(self, request, *args, **kwargs):
+        return render(request, "dashboard/dashboard.html", {"user": request.user})
 
 # Custom 404 View
 class Custom404View(TemplateView):
