@@ -1,22 +1,23 @@
 from django import forms
-from .models import Property, ContactMessage
+from .models import Companyinfo, ContactMessage
+
+
+class CompanyinfoForm(forms.ModelForm):
+    class Meta:
+        model = Companyinfo
+        fields = [
+            'company_name', 'logo', 'province_code', 'area_code',
+            'address', 'phone1', 'phone2', 'company_email',
+            'subscription_type', 'notes_and_description'
+        ]
 
 
 class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
         fields = ['name', 'email', 'message']
-
-    # Optional: You can customize widgets for better control over rendering
-    widgets = {
-        'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
-        'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'}),
-        'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your Message'}),
-    }
-
-
-# Property Form (if you need one for agents to add/edit properties)
-class PropertyForm(forms.ModelForm):
-    class Meta:
-        model = Property
-        fields = ['title', 'description', 'price', 'location', 'bedrooms', 'bathrooms', 'area', 'property_type', 'image', 'is_featured']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your Message'}),
+        }

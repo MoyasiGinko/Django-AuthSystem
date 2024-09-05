@@ -1,10 +1,4 @@
 {% extends 'layout.html' %} {% load static %} {% block content %}
-<h1>{{ property.title }}</h1>
-<img src="{{ property.image.url }}" alt="{{ property.title }}" />
-<p><strong>Price:</strong> ${{ property.price }}</p>
-<p><strong>Location:</strong> {{ property.location }}</p>
-<p><strong>Bedrooms:</strong> {{ property.bedrooms }}</p>
-<p><strong>Bathrooms:</strong> {{ property.bathrooms }}</p>
-<p><strong>Area:</strong> {{ property.area }} sqft</p>
-<p>{{ property.description }}</p>
+<h1>details</h1>
+
 {% endblock %}

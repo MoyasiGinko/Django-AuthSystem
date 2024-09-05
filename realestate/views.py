@@ -1,28 +1,53 @@
 from django.views.generic import TemplateView, ListView, DetailView, View
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Property, ContactMessage
+from .models import  ContactMessage
+
+
+from django.contrib.auth.decorators import login_required
+from .models import Companyinfo
+from .forms import CompanyinfoForm
+
+
+
+
 
 # HomePage View
 class HomeView(TemplateView):
     template_name = 'realestate/home.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['featured_properties'] = Property.objects.filter(is_featured=True)[:3]  # Example: Get 3 featured properties
-        return context
 
-# Property List View
-class PropertyListView(ListView):
-    model = Property
-    template_name = 'realestate/property_list.html'
-    context_object_name = 'properties'
+@login_required
+def create_companyinfo(request):
+    if hasattr(request.user, 'company_info'):
+        return redirect('profile')  # User already has a company, redirect to profile
 
-# Property Detail View
-class PropertyDetailView(DetailView):
-    model = Property
-    template_name = 'realestate/property_detail.html'
-    context_object_name = 'property'
+    if request.method == 'POST':
+        form = CompanyinfoForm(request.POST, request.FILES)
+        if form.is_valid():
+            company_info = form.save(commit=False)
+            company_info.user = request.user
+            company_info.save()
+            return redirect('profile')  # Redirect to profile after creation
+    else:
+        form = CompanyinfoForm()
+
+    return render(request, 'realestate/create_companyinfo.html', {'form': form})
+
+@login_required
+def edit_companyinfo(request, pk):
+    company_info = get_object_or_404(Companyinfo, pk=pk, user=request.user)
+
+    if request.method == 'POST':
+        form = CompanyinfoForm(request.POST, request.FILES, instance=company_info)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # Redirect to profile after editing
+    else:
+        form = CompanyinfoForm(instance=company_info)
+
+    return render(request, 'realestate/edit_companyinfo.html', {'form': form})
+
 
 # About Us View
 class AboutUsView(TemplateView):
