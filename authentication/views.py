@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 import json
 from django.http import JsonResponse, HttpResponse
-from django.contrib.auth.models import User
+from .models import CustomUser
 from validate_email import validate_email
 from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError, EmailMessage
@@ -57,18 +57,24 @@ class RegistrationView(View):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
+        company_name = request.POST.get('companyname')
+        province_code = request.POST.get('provincecode')
+        area_code = request.POST.get('areacode')
+        address = request.POST.get('address')
+        phone1 = request.POST.get('phone1')
+        phone2 = request.POST.get('phone2', '')
+        note_and_description = request.POST.get('noteandescription', '')
+        logofname = request.FILES.get('logofname')
 
         context = {
             'fieldValues': request.POST
         }
 
-        if User.objects.filter(username=username).exists():
+        if CustomUser.objects.filter(username=username).exists():
             messages.error(request, 'Username is already taken.')
             return render(request, 'authentication/register.html', context)
 
-        if User.objects.filter(email=email).exists():
+        if CustomUser.objects.filter(email=email).exists():
             messages.error(request, 'Email is already taken.')
             return render(request, 'authentication/register.html', context)
 
@@ -76,17 +82,28 @@ class RegistrationView(View):
             messages.error(request, 'Password is too short.')
             return render(request, 'authentication/register.html', context)
 
-        user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name)
+        user = CustomUser.objects.create_user(
+            username=username,
+            email=email,
+            company_name=company_name,
+            province_code=province_code,
+            area_code=area_code,
+            address=address,
+            phone1=phone1,
+            phone2=phone2,
+            note_and_description=note_and_description
+        )
+
+        user.logofname = logofname
         user.set_password(password)
         user.is_active = False
         user.save()
 
+        # Send activation email and show success message
         send_activation_email(request, user)
         messages.success(request, 'Account successfully created. Please check your email to activate your account.')
-        if user.is_active is False:
-            return redirect('activation_prompt', user_id=user.id)
-        return render(request, 'authentication/register.html')
 
+        return redirect('activation_prompt', user_id=user.id)
 
 
 class VerificationView(View):

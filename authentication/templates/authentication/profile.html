@@ -1,59 +1,12 @@
-{% extends 'layout.html' %} {% load static %} {% block content %}
+{% extends 'base_auth.html' %} {% load static %} {% block content %}
 <div class="profile-container">
   <h1>Your Profile</h1>
 
   <div class="profile-details">
     <h2>User Information</h2>
     <p><strong>Username:</strong> {{ user.username }}</p>
-    <p><strong>First Name:</strong> {{ user.first_name }}</p>
-    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
   </div>
-
-  {% if user.company_info %}
-  <div class="company-details">
-    <h2>Company Information</h2>
-    <p><strong>Company Name:</strong> {{ user.company_info.company_name }}</p>
-    <p><strong>Address:</strong> {{ user.company_info.address }}</p>
-    <p><strong>Phone 1:</strong> {{ user.company_info.phone1 }}</p>
-    <p><strong>Phone 2:</strong> {{ user.company_info.phone2 }}</p>
-    <p><strong>Email:</strong> {{ user.company_info.company_email }}</p>
-    <p>
-      <strong>Subscription Type:</strong>
-      {{ user.company_info.get_subscription_type_display }}
-    </p>
-    <p>
-      <strong>Activation Status:</strong>
-      {{ user.company_info.get_member_activation_status_display }}
-    </p>
-    <p>
-      <strong>Notes and Description:</strong>
-      {{ user.company_info.notes_and_description }}
-    </p>
-
-    {% if user.company_info.logo %}
-    <p><strong>Logo:</strong></p>
-    <img
-      src="{{ user.company_info.logo.url }}"
-      alt="Company Logo"
-      class="company-logo"
-    />
-    {% endif %}
-
-    <!-- Edit button -->
-    <a
-      href="{% url 'edit_companyinfo' user.company_info.id %}"
-      class="btn btn-primary"
-      >Edit Company Info</a
-    >
-  </div>
-  {% else %}
-  <p>No company information available.</p>
-  <!-- Add button -->
-  <a href="{% url 'create_companyinfo' %}" class="btn btn-primary"
-    >Add Company Info</a
-  >
-  {% endif %}
 </div>
 
 <link rel="stylesheet" href="{% static 'authentication/css/profile.css' %}" />

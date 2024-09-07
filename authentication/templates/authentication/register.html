@@ -8,99 +8,164 @@
           <h4 class="card-title text-primary">Register for a Free Account</h4>
           <p class="text-muted">Join us and get started today!</p>
         </div>
-        <form action="{% url 'register' %}" method="post">
+        <form
+          action="{% url 'register' %}"
+          method="post"
+          enctype="multipart/form-data"
+        >
           {% csrf_token %} {% include 'partials/_messages.html' %}
 
+          <!-- Company Name -->
           <div class="form-floating mb-3">
-            <label for="first_nameField">First Name</label>
-
             <input
               type="text"
-              name="first_name"
-              placeholder="First Name"
-              id="first_nameField"
-              value="{{ fieldValues.first_name }}"
               class="form-control"
+              id="companynameField"
+              name="companyname"
+              placeholder="Company Name"
+              required
+            />
+            <label for="companynameField">Company Name</label>
+          </div>
+
+          <!-- Logo -->
+          <div class="mb-3">
+            <label for="logofnameField" class="form-label">Company Logo</label>
+            <input
+              type="file"
+              class="form-control"
+              id="logofnameField"
+              name="logofname"
             />
           </div>
 
+          <!-- Province Code -->
           <div class="form-floating mb-3">
-            <label for="last_nameField">Last Name</label>
-
             <input
               type="text"
-              name="last_name"
-              placeholder="Last Name"
-              id="last_nameField"
-              value="{{ fieldValues.last_name }}"
               class="form-control"
+              id="provincecodeField"
+              name="provincecode"
+              placeholder="Province Code"
+              maxlength="2"
+              required
             />
+            <label for="provincecodeField">Province Code</label>
           </div>
 
+          <!-- Area Code -->
           <div class="form-floating mb-3">
-            <label for="usernameField">Username</label>
-
             <input
               type="text"
-              name="username"
-              placeholder="Username"
-              id="usernameField"
-              value="{{ fieldValues.username }}"
               class="form-control"
+              id="areacodeField"
+              name="areacode"
+              placeholder="Area Code"
+              maxlength="4"
+              required
             />
+            <label for="areacodeField">Area Code</label>
           </div>
 
+          <!-- Address -->
           <div class="form-floating mb-3">
-            <label for="emailField">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              id="addressField"
+              name="address"
+              placeholder="Address"
+              maxlength="30"
+              required
+            />
+            <label for="addressField">Address</label>
+          </div>
 
+          <!-- Phone 1 -->
+          <div class="form-floating mb-3">
+            <input
+              type="tel"
+              class="form-control"
+              id="phone1Field"
+              name="phone1"
+              placeholder="Phone 1"
+              maxlength="15"
+              required
+            />
+            <label for="phone1Field">Phone 1</label>
+          </div>
+
+          <!-- Phone 2 -->
+          <div class="form-floating mb-3">
+            <input
+              type="tel"
+              class="form-control"
+              id="phone2Field"
+              name="phone2"
+              placeholder="Phone 2"
+              maxlength="15"
+            />
+            <label for="phone2Field">Phone 2</label>
+          </div>
+
+          <!-- Company Email -->
+          <div class="form-floating mb-3">
             <input
               type="email"
-              name="email"
-              placeholder="Email"
               class="form-control"
-              id="emailField"
-              value="{{ fieldValues.email }}"
+              id="cemailField"
+              name="email"
+              placeholder="Company Email"
+              required
             />
+            <label for="cemailField">Company Email</label>
           </div>
 
-          <div class="form-floating mb-3 position-relative">
-            <label for="passwordField">Password</label>
+          <!-- Username -->
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="usernameField"
+              name="username"
+              placeholder="Username"
+              maxlength="10"
+              required
+            />
+            <label for="usernameField">Username</label>
+          </div>
 
+          <!-- Password -->
+          <div class="form-floating mb-3">
             <input
               type="password"
-              name="password"
-              placeholder="Password"
               class="form-control"
               id="passwordField"
+              name="password"
+              placeholder="Password"
+              maxlength="8"
+              required
             />
-            <div class="password-utils">
-              <div class="passwordStrengthIndicator"></div>
-
-              <small
-                class="position-absolute showPasswordToggle"
-                style="
-                  right: 10px;
-                  top: 50%;
-                  transform: translateY(-50%);
-                  cursor: pointer;
-                "
-              >
-                SHOW
-              </small>
-            </div>
+            <label for="passwordField">Password</label>
           </div>
 
+          <!-- Note and Description -->
+          <div class="form-floating mb-3">
+            <textarea
+              class="form-control"
+              id="noteandescriptionField"
+              name="noteandescription"
+              placeholder="Notes and Description"
+              style="height: 100px"
+            ></textarea>
+            <label for="noteandescriptionField">Notes and Description</label>
+          </div>
+
+          <!-- Submit Button -->
           <div class="d-grid">
-            <input
-              type="submit"
-              value="Register"
-              class="btn btn-primary btn-block submit-btn"
-            />
-            <div class="text-center mt-4">
-              <p class="text-muted mb-0">
-                Already have an account? <a href="{% url 'login' %}">Login</a>
-              </p>
-            </div>
+            <button class="btn btn-primary btn-block" type="submit">
+              Register
+            </button>
           </div>
         </form>
       </div>
@@ -108,8 +173,4 @@
   </div>
 </div>
 
-<!-- Include custom CSS file -->
-<link rel="stylesheet" href="{% static 'authentication/css/register.css' %}" />
-<script src="{% static 'authentication/js/register.js' %}"></script>
-
-{% endblock content %}
+{% endblock %}
