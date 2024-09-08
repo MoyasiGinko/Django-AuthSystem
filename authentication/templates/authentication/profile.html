@@ -10,10 +10,41 @@
     <p><strong>Province:</strong> {{ user.province_code }}</p>
     <p><strong>Area:</strong> {{ user.area_code }}</p>
     {% if user.company_logo %}
-    <img src="{{ user.company_logo.url }}" alt="Company Logo" />
+    <img
+      class="company-logo"
+      src="{{ user.company_logo.url }}"
+      alt="Company Logo"
+    />
     {% else %}
     <p>No logo uploaded</p>
     {% endif %}
+
+    <p><strong>Phone Number 1 (Primary):</strong> {{ user.phone1 }}</p>
+    <p><strong>Phone Number 2:</strong> {{ user.phone2 }}</p>
+    <p><strong>Member Since:</strong> {{ user.registration_date }}</p>
+    <p><strong>Activation Date:</strong> {{ user.current_activation_date }}</p>
+    <p><strong>Expiry Date:</strong> {{ user.expiry_activation_date }}</p>
+
+    <div>
+      {% if user.subscription_type == 'F' %}
+      <p><strong>Subscription Type:</strong>Free</p>
+      {% elif user.subscription_type == 'P'%}
+      <p><strong>Subscription Type:</strong>Paid</p>
+      {% else %}
+      <p><strong>Subscription Type:</strong>Unknown</p>
+      {% endif %}
+    </div>
+
+    <div>
+      {% if user.mem_activation_status == 'A' %}
+      <p><strong>Membership Status:</strong> Active</p>
+      {% elif user.mem_activation_status == 'I' %}
+      <p><strong>Membership Status:</strong> Inactive</p>
+      {% else %}
+      <p><strong>Membership Status:</strong> Unknown</p>
+      {% endif %}
+    </div>
+    <p><strong>Description:</strong> {{ user.note_and_description }}</p>
   </div>
 </div>
 
