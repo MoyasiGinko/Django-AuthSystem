@@ -92,3 +92,9 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
+
+- To create a Django Super User
+
+```bash
+python manage.py createsuperuser
+```
