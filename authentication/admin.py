@@ -10,7 +10,7 @@ class CustomUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('company_name', 'email', 'logofname', 'address', 'province_code', 'area_code')}),
+        ('Personal info', {'fields': ('company_name', 'email', 'company_logo', 'address', 'province_code', 'area_code')}),
         ('Contact Info', {'fields': ('phone1', 'phone2')}),
         ('Subscription Info', {'fields': ('subscription_type', 'mem_activation_status', 'note_and_description')}),
         ('Activation Dates', {'fields': ('registration_date', 'current_activation_date', 'expiry_current_activation')}),

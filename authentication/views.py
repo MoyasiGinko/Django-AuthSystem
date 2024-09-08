@@ -64,7 +64,7 @@ class RegistrationView(View):
         phone1 = request.POST.get('phone1')
         phone2 = request.POST.get('phone2', '')
         note_and_description = request.POST.get('noteandescription', '')
-        logofname = request.FILES.get('logofname')
+        company_logo = request.FILES.get('company_logo')
 
         context = {
             'fieldValues': request.POST
@@ -94,7 +94,7 @@ class RegistrationView(View):
             note_and_description=note_and_description
         )
 
-        user.logofname = logofname
+        user.company_logo = company_logo
         user.set_password(password)
         user.is_active = False
         user.save()

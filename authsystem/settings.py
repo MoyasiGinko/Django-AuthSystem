@@ -107,6 +107,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'authentication.CustomUser'
 
+MEDIA_URL = '/media/'  # URL to serve media files
+MEDIA_ROOT = BASE_DIR / 'media'  # Directory where uploaded files will be stored
+
 LOGOUT_REDIRECT_URL = 'login'
 
 

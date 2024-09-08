@@ -6,7 +6,7 @@ class CustomUser(AbstractUser):
     username = models.CharField(max_length=10, unique=True)  # Ensure username is unique
     password = models.CharField(max_length=128, validators=[MinLengthValidator(8)])  # Corrected password field
     company_name = models.CharField(max_length=30, blank=True, null=True)
-    logofname = models.ImageField(upload_to='logos/', blank=True, null=True)
+    company_logo = models.ImageField(upload_to='company_logos/', blank=True, null=True)
     province_code = models.CharField(max_length=2, blank=True, null=True)
     area_code = models.CharField(max_length=4, blank=True, null=True)
     address = models.CharField(max_length=30, blank=True, null=True)
