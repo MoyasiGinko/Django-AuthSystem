@@ -1,16 +1,5 @@
 from django import forms
-from .models import Companyinfo, ContactMessage
-
-
-class CompanyinfoForm(forms.ModelForm):
-    class Meta:
-        model = Companyinfo
-        fields = [
-            'company_name', 'logo', 'province_code', 'area_code',
-            'address', 'phone1', 'phone2', 'company_email',
-            'subscription_type', 'notes_and_description'
-        ]
-
+from .models import ContactMessage
 
 class ContactForm(forms.ModelForm):
     class Meta:
