@@ -11,14 +11,14 @@ body {
 
 /* Centered Register Container with 3D effect */
 .card {
-  margin-top: 400px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 20px;
   background: linear-gradient(145deg, #ffffff, #d4d4d4);
   box-shadow: 5px 5px 15px #b0b0b0, -5px -5px 15px #ffffff;
   padding: 3rem;
   max-width: 400px;
   width: 100%;
-  transform: translateY(-50%);
 }
 
 .card-body {

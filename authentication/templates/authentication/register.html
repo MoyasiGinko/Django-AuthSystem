@@ -17,6 +17,8 @@
 
           <!-- Company Name -->
           <div class="form-floating mb-3">
+            <label for="companynameField">Company Name</label>
+
             <input
               type="text"
               class="form-control"
@@ -25,7 +27,6 @@
               placeholder="Company Name"
               required
             />
-            <label for="companynameField">Company Name</label>
           </div>
 
           <!-- Logo -->
@@ -41,6 +42,8 @@
 
           <!-- Province Code -->
           <div class="form-floating mb-3">
+            <label for="provincecodeField">Province Code</label>
+
             <input
               type="text"
               class="form-control"
@@ -50,11 +53,12 @@
               maxlength="2"
               required
             />
-            <label for="provincecodeField">Province Code</label>
           </div>
 
           <!-- Area Code -->
           <div class="form-floating mb-3">
+            <label for="areacodeField">Area Code</label>
+
             <input
               type="text"
               class="form-control"
@@ -64,11 +68,12 @@
               maxlength="4"
               required
             />
-            <label for="areacodeField">Area Code</label>
           </div>
 
           <!-- Address -->
           <div class="form-floating mb-3">
+            <label for="addressField">Address</label>
+
             <input
               type="text"
               class="form-control"
@@ -78,11 +83,12 @@
               maxlength="30"
               required
             />
-            <label for="addressField">Address</label>
           </div>
 
           <!-- Phone 1 -->
           <div class="form-floating mb-3">
+            <label for="phone1Field">Phone 1</label>
+
             <input
               type="tel"
               class="form-control"
@@ -92,11 +98,12 @@
               maxlength="15"
               required
             />
-            <label for="phone1Field">Phone 1</label>
           </div>
 
           <!-- Phone 2 -->
           <div class="form-floating mb-3">
+            <label for="phone2Field">Phone 2</label>
+
             <input
               type="tel"
               class="form-control"
@@ -105,11 +112,12 @@
               placeholder="Phone 2"
               maxlength="15"
             />
-            <label for="phone2Field">Phone 2</label>
           </div>
 
           <!-- Company Email -->
           <div class="form-floating mb-3">
+            <label for="cemailField">Company Email</label>
+
             <input
               type="email"
               class="form-control"
@@ -118,11 +126,12 @@
               placeholder="Company Email"
               required
             />
-            <label for="cemailField">Company Email</label>
           </div>
 
           <!-- Username -->
           <div class="form-floating mb-3">
+            <label for="usernameField">Username</label>
+
             <input
               type="text"
               class="form-control"
@@ -132,11 +141,12 @@
               maxlength="10"
               required
             />
-            <label for="usernameField">Username</label>
           </div>
 
           <!-- Password -->
           <div class="form-floating mb-3">
+            <label for="passwordField">Password</label>
+
             <input
               type="password"
               class="form-control"
@@ -146,11 +156,12 @@
               maxlength="8"
               required
             />
-            <label for="passwordField">Password</label>
           </div>
 
           <!-- Note and Description -->
           <div class="form-floating mb-3">
+            <label for="noteandescriptionField">Notes and Description</label>
+
             <textarea
               class="form-control"
               id="noteandescriptionField"
@@ -158,7 +169,6 @@
               placeholder="Notes and Description"
               style="height: 100px"
             ></textarea>
-            <label for="noteandescriptionField">Notes and Description</label>
           </div>
 
           <!-- Submit Button -->
@@ -173,4 +183,5 @@
   </div>
 </div>
 
+<link rel="stylesheet" href="{% static 'authentication/css/register.css' %}" />
 {% endblock %}
