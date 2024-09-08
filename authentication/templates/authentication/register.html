@@ -156,6 +156,21 @@
               maxlength="8"
               required
             />
+
+            <div class="password-utils">
+              <div class="passwordStrengthIndicator"></div>
+              <small
+                class="position-absolute showPasswordToggle"
+                style="
+                  right: 10px;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  cursor: pointer;
+                "
+              >
+                SHOW
+              </small>
+            </div>
           </div>
 
           <!-- Note and Description -->
@@ -173,7 +188,7 @@
 
           <!-- Submit Button -->
           <div class="d-grid">
-            <button class="btn btn-primary btn-block" type="submit">
+            <button class="submit-btn btn-primary btn-block" type="submit">
               Register
             </button>
           </div>
@@ -184,4 +199,5 @@
 </div>
 
 <link rel="stylesheet" href="{% static 'authentication/css/register.css' %}" />
+<script src="{% static 'authentication/js/register.js' %}"></script>
 {% endblock %}
