@@ -138,20 +138,34 @@ class LoginView(View):
         password = request.POST['password']
 
         if username and password:
+            # Authenticate user based on provided username and password
             user = auth.authenticate(username=username, password=password)
 
             if user:
+                # Check if the user is active
                 if user.is_active:
-                    auth.login(request, user)
-                    messages.success(request, f'Welcome, {user.username}. You are now logged in.')
-                    return redirect('profile')
+                    # Check membership activation status
+                    if user.mem_activation_status == 'A':  # Assuming 'A' means 'Active'
+                        auth.login(request, user)
+                        messages.success(request, f'Welcome, {user.username}. You are now logged in.')
+                        return redirect('profile')
+                    else:
+                        # If membership is inactive, show a message to renew membership
+                        messages.error(request, 'Your membership is inactive. Please renew your membership.')
+                        return render(request, 'authentication/login.html')
+
+                # Account is not active
                 messages.error(request, 'Account is not active. Please check your email.')
                 return render(request, 'authentication/login.html')
+
+            # Invalid credentials
             messages.error(request, 'Invalid credentials. Please try again.')
             return render(request, 'authentication/login.html')
 
+        # Fields are not filled in
         messages.error(request, 'Please fill in all fields.')
         return render(request, 'authentication/login.html')
+
 
 
 class LogoutView(View):
