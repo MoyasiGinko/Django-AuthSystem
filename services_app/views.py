@@ -1,7 +1,6 @@
 # views.py
 from django.shortcuts import render, redirect
 from .models import Service, ServiceType
-from .forms import ServiceForm
 
 def service_list(request):
     services = Service.objects.all()
@@ -9,17 +8,26 @@ def service_list(request):
 
 def service_create(request):
     if request.method == 'POST':
-        form = ServiceForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('service_list')
-    else:
-        form = ServiceForm()
-    return render(request, 'services/service_form.html', {'form': form})
+        name = request.POST.get('name')
+        service_type_id = request.POST.get('service_type')
+        description = request.POST.get('description')
+
+        # Get the service type object by ID
+        service_type = ServiceType.objects.get(id=service_type_id)
+
+        # Create and save the new service
+        Service.objects.create(name=name, service_type=service_type, description=description)
+
+        return redirect('service_list')
+
+    # Fetch all service types to populate the dropdown
+    service_types = ServiceType.objects.all()
+    return render(request, 'services/service_form.html', {'service_types': service_types})
 
 def service_type_create(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         ServiceType.objects.create(name=name)
         return redirect('service_list')
+
     return render(request, 'services/service_type_form.html')
