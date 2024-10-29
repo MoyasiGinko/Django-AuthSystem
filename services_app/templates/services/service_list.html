@@ -1,0 +1,82 @@
+<!-- templates/services/service_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Service List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin: 5px 0;
+        border-radius: 5px;
+      }
+      a {
+        text-decoration: none;
+        color: #007bff;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .service-btn a {
+        border-box: 1px solid #ccc;
+        padding: 10px 15px;
+        border: 1px solid #000;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Service List</h1>
+    <div class="service-btn">
+    <a
+      href="{% url 'service_create' %}"
+      style="margin-bottom: 20px; display: inline-block"
+      >Create New Service</a
+    >
+    <a
+      href="{% url 'service_type_create' %}"
+      style="margin-bottom: 20px; display: inline-block"
+      >Create New Service Type</a
+    >
+    <div>
+    <ul>
+      {% for service in services %}
+      <li>
+        <strong>{{ service.name }}</strong> - {{ service.service_type.name }}<br />
+        <span>{{ service.description }}</span>
+      </li>
+      {% empty %}
+      <li>No services available.</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

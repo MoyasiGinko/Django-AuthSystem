@@ -27,12 +27,12 @@ To manage the libraries or packages you've used and installed in your Django pro
 - It's a good practice to use a virtual environment to manage your project's dependencies separately from other Python projects on your machine.
 - You can create a virtual environment with:
   ```bash
-  python -m venv venv
+  python -m venv myenv
   ```
 - Activate the virtual environment:
   - On Windows:
     ```bash
-    venv\Scripts\activate
+    myenv\Scripts\activate
     ```
   - On macOS/Linux:
     ```bash
@@ -55,6 +55,7 @@ This approach ensures that your Django project's dependencies are well-managed a
 
 ```bash
 python -m venv myenv
+myenv\Scripts\activate
 django-admin startproject < project_name >
 python manage.py startapp < app_name >
 ```
