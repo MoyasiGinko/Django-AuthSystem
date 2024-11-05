@@ -41,22 +41,28 @@ from .models import Country, City
 
 def country_city_view(request):
     countries = Country.objects.all()
-    return render(request, 'services/country_city.html', {'countries': countries})
+    cities = []
+    selected_country_id = request.GET.get('country')
+
+    if selected_country_id:
+        # Fetch cities only if a country is selected
+        cities = City.objects.filter(country_id=selected_country_id)
+
+    context = {
+        'countries': countries,
+        'cities': cities,
+        'selected_country_id': selected_country_id,
+    }
+    return render(request, 'services/country_city.html', context)
 
 def load_cities(request):
     country_id = request.GET.get('country_id')
-    print("Received country_id:", country_id)  # Debugging line
-
     if not country_id:
         return JsonResponse({"error": "Country ID not provided"}, status=400)
 
-    try:
-        cities = City.objects.filter(country_id=country_id).values('id', 'name')
-        print("Cities:", list(cities))  # Debugging line
-        return JsonResponse(list(cities), safe=False)
-    except Exception as e:
-        print("Error:", e)  # Debugging line
-        return JsonResponse({"error": "Error loading cities"}, status=500)
+    # Fetch only the cities belonging to the selected country
+    cities = City.objects.filter(country_id=country_id).values('id', 'name')
+    return JsonResponse(list(cities), safe=False)
 
 
 

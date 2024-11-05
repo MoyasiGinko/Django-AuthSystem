@@ -2,8 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Select Country and City</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 0;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #333;
+      }
+      label {
+        font-weight: bold;
+      }
+      select {
+        margin: 10px 0;
+        padding: 5px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .btn-link {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 8px 12px;
+        color: white;
+        background-color: #007bff;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+      .btn-link:hover {
+        background-color: #0056b3;
+      }
+    </style>
   </head>
   <body>
     <h1>Select Country and City</h1>
@@ -16,15 +50,17 @@
       {% endfor %}
     </select>
 
-    <br /><br />
+    <br />
 
     <label for="city">City:</label>
     <select id="city" name="city">
       <option value="">Select a city</option>
     </select>
 
-    <a href="{% url 'create_country' %}" class="btn-link">Create Country</a>
-    <a href="{% url 'create_city' %}" class="btn-link">Create City</a>
+    <div>
+      <a href="{% url 'create_country' %}" class="btn-link">Create Country</a>
+      <a href="{% url 'create_city' %}" class="btn-link">Create City</a>
+    </div>
 
     <script type="text/javascript">
       $(document).ready(function () {
