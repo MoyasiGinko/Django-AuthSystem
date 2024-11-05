@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create City</title>
+  </head>
+  <body>
+    <h1>Create City</h1>
+    <form method="post">
+      {% csrf_token %}
+      <label for="code">City Code:</label>
+      <input type="text" name="code" id="code" required /><br /><br />
+
+      <label for="name">City Name:</label>
+      <input type="text" name="name" id="name" required /><br /><br />
+
+      <label for="country">Country:</label>
+      <select name="country" id="country" required>
+        {% for country in countries %}
+        <option value="{{ country.id }}">{{ country.name }}</option>
+        {% endfor %}</select
+      ><br /><br />
+
+      <button type="submit">Save City</button>
+    </form>
+    <a href="{% url 'country_city_view' %}">Back to City List</a>
+  </body>
+</html>

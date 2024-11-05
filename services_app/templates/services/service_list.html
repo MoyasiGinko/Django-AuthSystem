@@ -67,6 +67,12 @@
       style="margin-bottom: 20px; display: inline-block"
       >Create New Service Type</a
     >
+
+    <a
+      href="{% url 'country_city_view' %}"
+      style="margin-bottom: 20px; display: inline-block"
+      >Select Countries</a
+    >
     <div>
     <ul>
       {% for service in services %}
@@ -78,5 +84,6 @@
       <li>No services available.</li>
       {% endfor %}
     </ul>
+
   </body>
 </html>
