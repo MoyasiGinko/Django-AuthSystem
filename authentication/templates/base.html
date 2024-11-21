@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>{% block title %}Real Estate Company{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Custom styles -->
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
+
+    <!-- Chart.js for data visualization -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"
+        >Real Estate Company</a
+      >
+      <ul
+        class="navbar-nav px-3"
+        style="display: flex; flex-direction: row; align-items: center"
+      >
+        <li class="nav-item text-nowrap">
+          <span class="nav-link">({{ user.username }})</span>
+        </li>
+        <li class="nav-item text-nowrap ml-2">
+          <form action="{% url 'logout' %}" method="POST" class="form-inline">
+            {% csrf_token %}
+            <button class="btn btn-outline-light btn-sm" type="submit">
+              Sign out
+            </button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        {% include 'partials/_sidebar.html' %}
+
+        <!-- Main Section -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          {% block content %}
+          <!-- Content will be inserted here -->
+          {% endblock %}
+        </main>
+      </div>
+    </div>
+
+    <!-- jQuery and Bootstrap Bundle -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"
+      defer
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+      integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
+      crossorigin="anonymous"
+      defer
+    ></script>
+
+    <!-- Custom JS -->
+    <script src="{% static 'js/main.js' %}" defer></script>
+  </body>
+</html>

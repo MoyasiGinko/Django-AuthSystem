@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
+    'authentication',
+    'realestate',
+    'services_app',
 ]
 
 MIDDLEWARE = [
@@ -105,7 +107,10 @@ AUTH_PASSWORD_VALIDATORS = [
 #     'django.contrib.auth.backends.ModelBackend',  # Keep the default backend as fallback
 # ]
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'authentication.CustomUser'
+
+MEDIA_URL = '/media/'  # URL to serve media files
+MEDIA_ROOT = BASE_DIR / 'media'  # Directory where uploaded files will be stored
 
 LOGOUT_REDIRECT_URL = 'login'
 

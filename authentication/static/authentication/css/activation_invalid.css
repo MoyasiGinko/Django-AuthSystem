@@ -1,0 +1,88 @@
+/* General Styles */
+body {
+  background-color: #f0f4f8;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Invalid Link Container */
+.invalid-link-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+/* Card Style */
+.card {
+  background: linear-gradient(145deg, #ffffff, #e0e0e0);
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px #b0b0b0, -5px -5px 15px #ffffff;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Card Body */
+.card-body {
+  padding: 1rem;
+}
+
+/* Card Title */
+.card-title {
+  font-weight: 700;
+  color: #dc3545;
+  margin-bottom: 1rem;
+}
+
+/* Card Text */
+.card-text {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  margin: 0.5rem;
+}
+
+/* Primary Button */
+.btn-primary {
+  background: linear-gradient(145deg, #4e90e2, #1e3a8a);
+  color: white;
+  box-shadow: 5px 5px 15px #b0b0b0, -5px -5px 15px #ffffff;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+  box-shadow: 5px 5px 15px #b0b0b0, -5px -5px 15px #ffffff;
+}
+
+/* Hover effects */
+.btn-primary:hover {
+  background: linear-gradient(145deg, #1e3a8a, #4e90e2);
+  transform: scale(1.05);
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+  transform: scale(1.05);
+}

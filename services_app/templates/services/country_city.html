@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Country and City</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 0;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #333;
+      }
+      label {
+        font-weight: bold;
+      }
+      select {
+        margin: 10px 0;
+        padding: 5px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .btn-link {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 8px 12px;
+        color: white;
+        background-color: #007bff;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+      .btn-link:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Select Country and City</h1>
+
+    <label for="country">Country:</label>
+    <select id="country" name="country">
+      <option value="">Select a country</option>
+      {% for country in countries %}
+      <option value="{{ country.id }}">{{ country.name }}</option>
+      {% endfor %}
+    </select>
+
+    <br />
+
+    <label for="city">City:</label>
+    <select id="city" name="city">
+      <option value="">Select a city</option>
+    </select>
+
+    <div>
+      <a href="{% url 'create_country' %}" class="btn-link">Create Country</a>
+      <a href="{% url 'create_city' %}" class="btn-link">Create City</a>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        // Event listener for country dropdown changes
+        $("#country").on("change", function () {
+          var countryId = $(this).val();
+
+          // Clear the city dropdown and add default option
+          $("#city").empty().append('<option value="">Select a city</option>');
+
+          // Check if a country is selected
+          if (countryId) {
+            // AJAX call to fetch cities based on selected country
+            $.ajax({
+              url: "{% url 'load_cities' %}", // Django URL reverse
+              data: { country_id: countryId }, // Send country_id as a GET parameter
+              dataType: "json",
+              success: function (data) {
+                // Populate city dropdown with received data
+                $.each(data, function (index, city) {
+                  $("#city").append(
+                    $("<option></option>").val(city.id).text(city.name)
+                  );
+                });
+              },
+              error: function () {
+                alert("Error loading cities. Please try again.");
+              },
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

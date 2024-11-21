@@ -1,0 +1,91 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.company-name {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.nav-items {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-items li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.nav-items li a:hover {
+  background-color: #555;
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+  height: calc(100vh - 60px); /* Adjust based on navbar height */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 35%;
+  background-color: #f4f4f4;
+  padding: 20px;
+  overflow-y: auto;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar h2 {
+  margin-bottom: 15px;
+}
+
+.company-list {
+  list-style: none;
+}
+
+.company-list li {
+  padding: 10px;
+  background-color: #ddd;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.company-list li:hover {
+  background-color: #ccc;
+}
+
+/* Details Section */
+.details-section {
+  width: 65%;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+#company-details {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#company-details h2 {
+  margin-bottom: 10px;
+}

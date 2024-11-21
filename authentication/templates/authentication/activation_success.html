@@ -1,0 +1,19 @@
+{% extends 'base_auth.html' %} {% load static %} {% block content %}
+<div class="activation-success-container">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Activation Successful</h2>
+      <p class="card-text">
+        Your account has been successfully activated. You can now log in to your
+        account.
+      </p>
+      <a href="{% url 'login' %}" class="btn btn-primary">Go to Login</a>
+    </div>
+  </div>
+</div>
+
+<link
+  rel="stylesheet"
+  href="{% static 'authentication/css/activation_success.css' %}"
+/>
+{% endblock content %}

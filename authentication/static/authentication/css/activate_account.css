@@ -1,0 +1,67 @@
+/* General Styles */
+body {
+  background-color: #e0e0e0;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Activation Container */
+.activation-container {
+  background: linear-gradient(145deg, #ffffff, #e0e0e0);
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px #b0b0b0, -5px -5px 15px #ffffff;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Header */
+.activation-container h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-weight: 700;
+}
+
+/* Form Styles */
+.activation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.activation-form label {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.activation-form input {
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: none;
+  background: #f9f9f9;
+  box-shadow: inset 2px 2px 5px #b0b0b0, inset -2px -2px 5px #ffffff;
+  width: 100%;
+}
+
+.activation-form button {
+  padding: 0.75rem;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(145deg, #4e90e2, #1e3a8a);
+  color: white;
+  font-size: 1rem;
+  box-shadow: 5px 5px 15px #b0b0b0, -5px -5px 15px #ffffff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.activation-form button:hover {
+  background: linear-gradient(145deg, #1e3a8a, #4e90e2);
+  transform: scale(1.05);
+}

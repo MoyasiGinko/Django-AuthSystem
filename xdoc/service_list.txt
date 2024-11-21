@@ -1,0 +1,307 @@
+# :: MODELS
+
+# models.py
+from django.db import models
+
+class ServiceType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Service(models.Model):
+    name = models.CharField(max_length=100)
+    service_type = models.ForeignKey(ServiceType, on_delete=models.CASCADE)
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.name} - {self.service_type.name}"
+
+
+
+
+# :: VIEWS
+
+
+
+
+# views.py
+from django.shortcuts import render, redirect
+from .models import Service, ServiceType
+
+def service_list(request):
+    services = Service.objects.all()
+    return render(request, 'services/service_list.html', {'services': services})
+
+def service_create(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        service_type_id = request.POST.get('service_type')
+        description = request.POST.get('description')
+
+        # Get the service type object by ID
+        service_type = ServiceType.objects.get(id=service_type_id)
+
+        # Create and save the new service
+        Service.objects.create(name=name, service_type=service_type, description=description)
+
+        return redirect('service_list')
+
+    # Fetch all service types to populate the dropdown
+    service_types = ServiceType.objects.all()
+    return render(request, 'services/service_form.html', {'service_types': service_types})
+
+def service_type_create(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        ServiceType.objects.create(name=name)
+        return redirect('service_list')
+
+    return render(request, 'services/service_type_form.html')
+
+
+
+# :: URLS
+
+
+
+# urls.py
+from django.urls import path
+from .views import service_list, service_create, service_type_create
+
+urlpatterns = [
+    path('list/', service_list, name='service_list'),
+    path('create/', service_create, name='service_create'),
+    path('create/service-type/', service_type_create, name='service_type_create'),
+]
+
+
+
+
+
+
+
+
+# :: TEMPLATES
+
+
+<!-- templates/services/service_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Service List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin: 5px 0;
+        border-radius: 5px;
+      }
+      a {
+        text-decoration: none;
+        color: #007bff;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .service-btn a {
+        border-box: 1px solid #ccc;
+        padding: 10px 15px;
+        border: 1px solid #000;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Service List</h1>
+    <div class="service-btn">
+    <a
+      href="{% url 'service_create' %}"
+      style="margin-bottom: 20px; display: inline-block"
+      >Create New Service</a
+    >
+    <a
+      href="{% url 'service_type_create' %}"
+      style="margin-bottom: 20px; display: inline-block"
+      >Create New Service Type</a
+    >
+    <div>
+    <ul>
+      {% for service in services %}
+      <li>
+        <strong>{{ service.name }}</strong> - {{ service.service_type.name }}<br />
+        <span>{{ service.description }}</span>
+      </li>
+      {% empty %}
+      <li>No services available.</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
+
+
+
+
+
+
+
+<!-- templates/services/service_type_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Service Type</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+      }
+      label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Create Service Type</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <label for="id_name">Service Type Name:</label>
+      <input type="text" name="name" id="id_name" required />
+      <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'service_list' %}">Back to Service List</a>
+  </body>
+</html>
+
+
+
+
+
+
+<!-- templates/services/service_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Service</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+      }
+      label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+      input[type="text"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Create Service</h1>
+    <form method="POST">
+      {% csrf_token %}
+
+      <label for="id_name">Service Name:</label>
+      <input type="text" name="name" id="id_name" required />
+
+      <label for="id_service_type">Service Type:</label>
+      <select name="service_type" id="id_service_type" required>
+        {% for service_type in service_types %}
+        <option value="{{ service_type.id }}">{{ service_type.name }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="id_description">Description:</label>
+      <textarea name="description" id="id_description" required></textarea>
+
+      <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'service_list' %}">Back to Service List</a>
+  </body>
+</html>
